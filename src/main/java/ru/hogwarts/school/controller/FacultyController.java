@@ -37,7 +37,7 @@ public class FacultyController {
 
     @PostMapping // http://localhost:8080/faculty
     public ResponseEntity<Faculty> createFaculty(@RequestBody Faculty faculty) {
-        Faculty foundFaculty = facultyService.add(faculty);
+        Faculty foundFaculty = facultyService.createFaculty(faculty);
         if (foundFaculty == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
@@ -54,8 +54,9 @@ public class FacultyController {
     }
 
     @DeleteMapping("{id}") // Delete http://localhost:8080/faculty/42
-    public Faculty deleteFaculty(@PathVariable long id) {
-        return facultyService.deleteFaculty(id);
+    public ResponseEntity deleteFaculty(@PathVariable long id) {
+        facultyService.deleteFaculty(id);
+        return ResponseEntity.ok().build();
     }
 
 }
