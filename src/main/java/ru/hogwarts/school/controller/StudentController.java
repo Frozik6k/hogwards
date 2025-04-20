@@ -28,8 +28,8 @@ public class StudentController {
     }
 
     @GetMapping // http://localhost:8080/student
-    public ResponseEntity<Collection<Student>> findStudents(@RequestParam(required = false) int age) {
-        if (age > 0) {
+    public ResponseEntity<Collection<Student>> findStudents(@RequestParam(required = false) Integer age) {
+        if (age != null) {
             return ResponseEntity.ok(studentService.findByAge(age));
         }
         return ResponseEntity.ok(studentService.getAll());
