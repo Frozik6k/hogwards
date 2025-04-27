@@ -3,6 +3,7 @@ package ru.hogwarts.school.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
@@ -19,18 +20,21 @@ public class StudentController {
     }
 
     @GetMapping("{id}") // http://localhost:8080/student/43
-    public ResponseEntity getStudentInfo(@PathVariable long id,
-                                         @RequestParam(required = false) Integer faculty) {
+    public ResponseEntity getStudentInfo(@PathVariable long id) {
         Student student = studentService.findStudent(id);
         if (student == null) {
             return ResponseEntity.notFound().build();
         }
-
-        if (faculty != null && faculty == 1) {
-            return ResponseEntity.ok(student.getFaculty());
-        }
-
         return ResponseEntity.ok(student);
+    }
+
+    @GetMapping("{id}/faculty")
+    public ResponseEntity getFacultyStudent(@PathVariable long id) {
+        Student student = studentService.findStudent(id);
+        if (student == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(student.getFaculty());
     }
 
     @GetMapping // http://localhost:8080/student
