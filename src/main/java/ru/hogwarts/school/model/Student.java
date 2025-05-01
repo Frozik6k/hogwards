@@ -2,18 +2,24 @@ package ru.hogwarts.school.model;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.Data;
+
+@Entity
 public class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
     private int age;
 
-    public Student(String name, int age) {
-        this.id = 0;
-        this.name = name;
-        this.age = age;
-    }
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "faculty_id")
+    private Faculty faculty;
 
-    public long getId(){
+    public long getId() {
         return id;
     }
 
@@ -21,7 +27,7 @@ public class Student {
         this.id = id;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
@@ -29,7 +35,7 @@ public class Student {
         this.name = name;
     }
 
-    public int getAge(){
+    public int getAge() {
         return age;
     }
 
@@ -37,8 +43,20 @@ public class Student {
         this.age = age;
     }
 
+    public FacultyDTO getFaculty() {
+        FacultyDTO facultyDTO = new FacultyDTO();
+        facultyDTO.setId(faculty.getId());
+        facultyDTO.setName(faculty.getName());
+        facultyDTO.setColor(faculty.getColor());
+        return facultyDTO;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
+
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return Objects.hash(getId(), getName(), getAge());
     }
 
