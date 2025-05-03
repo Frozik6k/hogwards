@@ -4,7 +4,6 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
 
 @Entity
 public class Student {
@@ -14,7 +13,7 @@ public class Student {
     private String name;
     private int age;
 
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
@@ -43,13 +42,15 @@ public class Student {
         this.age = age;
     }
 
-    public FacultyDTO getFaculty() {
-        FacultyDTO facultyDTO = new FacultyDTO();
+    public Faculty getFaculty() {
+        Faculty facultyDTO = new Faculty();
         facultyDTO.setId(faculty.getId());
         facultyDTO.setName(faculty.getName());
         facultyDTO.setColor(faculty.getColor());
         return facultyDTO;
     }
+
+
 
     public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
@@ -57,7 +58,7 @@ public class Student {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getAge());
+        return Objects.hash(id, name, age, faculty);
     }
 
     @Override
@@ -65,7 +66,10 @@ public class Student {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         Student student = (Student) object;
-        return getId() == student.getId() && getAge() == student.getAge() && Objects.equals(getName(), student.getName());
+        return getId() == student.getId() &&
+                getAge() == student.getAge() &&
+                Objects.equals(getName(), student.getName()) &&
+                Objects.equals(getFaculty(), student.getFaculty());
     }
 
     @Override
@@ -74,6 +78,6 @@ public class Student {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
-                '}';
+                "} " + faculty;
     }
 }
