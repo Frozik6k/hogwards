@@ -30,7 +30,7 @@ public class FacultyController {
     }
 
     @GetMapping("{id}/students")
-    public ResponseEntity getFacultyStudents(@PathVariable long id) {
+    public ResponseEntity<Collection<Student>> getFacultyStudents(@PathVariable long id) {
         Faculty faculty = facultyService.findFaculty(id);
         return ResponseEntity.ok(faculty.getStudents());
     }
@@ -72,5 +72,7 @@ public class FacultyController {
         facultyService.deleteFaculty(id);
         return ResponseEntity.ok().build();
     }
+
+
 
 }

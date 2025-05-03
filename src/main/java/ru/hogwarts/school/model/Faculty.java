@@ -16,7 +16,7 @@ public class Faculty {
     private String name;
     private String color;
 
-    @OneToMany(mappedBy = "faculty")
+    @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL)
     @JsonIgnore
     private Collection<Student> students;
 
@@ -68,10 +68,16 @@ public class Faculty {
 
     @Override
     public String toString() {
+
+        String students = "";
+        if (this.students != null) {
+            for( Student student : this.students) students += student + "\n";
+        }
+
         return "Faculty{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", color='" + color + '\'' +
-                '}';
+                '}' + students;
     }
 }
