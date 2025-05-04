@@ -10,17 +10,17 @@ import ru.hogwarts.school.controller.StudentController;
 @SpringBootTest
 class SchoolApplicationTests {
 
-	@Autowired
-	private StudentController studentController;
+    @Autowired
+    private StudentController studentController;
 
-	@Autowired
-	private FacultyController facultyController;
+    @Autowired
+    private FacultyController facultyController;
 
 
-	@Test
-	void contextLoads() {
-		Assertions.assertThat(studentController).isNotNull();
-		Assertions.assertThat(facultyController).isNotNull();
-	}
+    @Test
+    void contextLoads() {
+        Assertions.assertThat(studentController).isNotNull();
+        Assertions.assertThat(facultyController).isNotNull();
+    }
 
 }

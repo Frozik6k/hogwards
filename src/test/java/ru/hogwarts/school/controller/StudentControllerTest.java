@@ -75,8 +75,8 @@ public class StudentControllerTest {
         when(studentRepository.findById(any(Long.class))).thenReturn(Optional.of(student));
 
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/student/" + student.getId())
-                .accept(MediaType.APPLICATION_JSON))
+                        .get("/student/" + student.getId())
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(StudentFixed.ID_STUDENT))
                 .andExpect(jsonPath("$.name").value(StudentFixed.NAME_STUDENT))
@@ -84,7 +84,7 @@ public class StudentControllerTest {
     }
 
     @Test
-    public void testGetFacultyStudent() throws Exception{
+    public void testGetFacultyStudent() throws Exception {
         when(studentRepository.findById(any(Long.class))).thenReturn(Optional.of(student));
 
         mockMvc.perform(MockMvcRequestBuilders
@@ -97,7 +97,7 @@ public class StudentControllerTest {
     }
 
     @Test
-    public void testFindStudents() throws  Exception {
+    public void testFindStudents() throws Exception {
 
         List<Student> students = new ArrayList<>();
         students.add(student);
@@ -120,10 +120,10 @@ public class StudentControllerTest {
         when(studentRepository.save(any(Student.class))).thenReturn(student);
 
         mockMvc.perform(MockMvcRequestBuilders
-                    .post("/student")
-                    .content(studentObject.toString())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .accept(MediaType.APPLICATION_JSON))
+                        .post("/student")
+                        .content(studentObject.toString())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(StudentFixed.ID_STUDENT))
                 .andExpect(jsonPath("$.name").value(StudentFixed.NAME_STUDENT))
@@ -161,7 +161,6 @@ public class StudentControllerTest {
                 .andExpect(status().isOk());
 
     }
-
 
 
 }
