@@ -86,8 +86,6 @@ public class FacultyControllerTest {
 
         faculty.addStudent(student);
 
-        System.out.println(faculty);
-
         when(facultyRepository.findById(any(Long.class))).thenReturn(Optional.of(faculty));
 
         mockMvc.perform(MockMvcRequestBuilders
