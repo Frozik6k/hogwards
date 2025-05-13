@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import org.hibernate.sql.ast.tree.expression.Collation;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -50,6 +51,9 @@ public class Faculty {
     }
 
     public void addStudent(Student student) {
+        if (students == null) {
+            students = new ArrayList<>();
+        }
         students.add(student);
     }
 
@@ -69,15 +73,10 @@ public class Faculty {
     @Override
     public String toString() {
 
-        String students = "";
-        if (this.students != null) {
-            for( Student student : this.students) students += student + "\n";
-        }
-
         return "Faculty{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", color='" + color + '\'' +
-                '}' + students;
+                '}';
     }
 }
