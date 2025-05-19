@@ -122,4 +122,18 @@ public class StudentController {
         }
     }
 
+    @GetMapping("count") // http://localhost:8080/student/count
+
+    public ResponseEntity<Integer> getCountStudent() {
+        return ResponseEntity.ok(studentService.getCountStudents());
+    }
+
+    @GetMapping("age") // http://localhost:8080/student/count
+    public ResponseEntity<Integer> getAvgAgeStudents() {
+        return ResponseEntity.ok(studentService.getAvgAgeStudents());
+    }
+
+    @GetMapping("end5students") // http://localhost:8080/student/end5students
+    public ResponseEntity<Collection<Student>> getEndFiveStudents() { return ResponseEntity.ok(studentService.findByEndFiveStudents()); }
+
 }
