@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
 
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
@@ -43,5 +43,19 @@ public class StudentService {
     public Collection<Student> findByAgeBetween(int min, int max) {
         return studentRepository.findByAgeBetween(min, max);
     }
+
+    public Integer getCountStudents() {
+        return studentRepository.getCountStudents();
+    }
+
+    public Integer getAvgAgeStudents() {
+        return studentRepository.getAvgAgeStudents();
+    }
+
+    public Collection<Student> findByEndFiveStudents() {
+        return studentRepository.findByEndFiveStudents();
+    }
+
+
 
 }

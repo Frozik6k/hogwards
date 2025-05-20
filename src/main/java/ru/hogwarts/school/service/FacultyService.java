@@ -10,7 +10,7 @@ import java.util.Collection;
 
 @Service
 public class FacultyService {
-    private FacultyRepository facultyRepository;
+    private final FacultyRepository facultyRepository;
 
     public FacultyService(FacultyRepository facultyRepository) {
         this.facultyRepository = facultyRepository;

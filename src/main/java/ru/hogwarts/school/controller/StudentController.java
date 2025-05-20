@@ -24,9 +24,9 @@ import java.util.Collection;
 @RequestMapping("student")
 public class StudentController {
 
-    private StudentService studentService;
+    private final StudentService studentService;
 
-    private AvatarService avatarService;
+    private final AvatarService avatarService;
 
     public StudentController(StudentService studentService, AvatarService avatarService) {
         this.studentService = studentService;
@@ -121,5 +121,19 @@ public class StudentController {
             is.transferTo(os);
         }
     }
+
+    @GetMapping("count") // http://localhost:8080/student/count
+
+    public ResponseEntity<Integer> getCountStudent() {
+        return ResponseEntity.ok(studentService.getCountStudents());
+    }
+
+    @GetMapping("age") // http://localhost:8080/student/count
+    public ResponseEntity<Integer> getAvgAgeStudents() {
+        return ResponseEntity.ok(studentService.getAvgAgeStudents());
+    }
+
+    @GetMapping("end5students") // http://localhost:8080/student/end5students
+    public ResponseEntity<Collection<Student>> getEndFiveStudents() { return ResponseEntity.ok(studentService.findByEndFiveStudents()); }
 
 }
