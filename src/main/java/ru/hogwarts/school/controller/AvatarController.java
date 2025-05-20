@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("avatar")
 public class AvatarController {
 
-    AvatarService avatarService;
+    private final AvatarService avatarService;
 
     AvatarController(AvatarService avatarService) {
         this.avatarService = avatarService;

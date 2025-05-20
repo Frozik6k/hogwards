@@ -24,9 +24,9 @@ import java.util.Collection;
 @RequestMapping("student")
 public class StudentController {
 
-    private StudentService studentService;
+    private final StudentService studentService;
 
-    private AvatarService avatarService;
+    private final AvatarService avatarService;
 
     public StudentController(StudentService studentService, AvatarService avatarService) {
         this.studentService = studentService;
