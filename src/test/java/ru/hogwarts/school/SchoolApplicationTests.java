@@ -7,7 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ru.hogwarts.school.controller.FacultyController;
 import ru.hogwarts.school.controller.StudentController;
 
-@SpringBootTest
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SchoolApplicationTests {
 
     @Autowired

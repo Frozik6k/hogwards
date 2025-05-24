@@ -1,6 +1,5 @@
 package ru.hogwarts.school.controller;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -134,6 +133,6 @@ public class StudentController {
     }
 
     @GetMapping("end5students") // http://localhost:8080/student/end5students
-    public ResponseEntity<Collection<Student>> getEndFiveStudents() { return ResponseEntity.ok(studentService.findByEndFiveStudents()); }
+    public ResponseEntity<Collection<Student>> getLastFiveStudents() { return ResponseEntity.ok(studentService.findByLastFiveStudents()); }
 
 }
