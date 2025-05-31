@@ -140,6 +140,31 @@ public class StudentService {
         }).start();
     }
 
+    public void getAllStudentPrintParallelSynchronized() {
+        PageRequest pageRequest = PageRequest.of(0, 6, Sort.by(Sort.Direction.ASC, "id"));
+        List<String> nameStudents = studentRepository.findAll(pageRequest)
+                .map(Student::getName)
+                .toList();
+        printStudent(nameStudents.get(0));
+        printStudent(nameStudents.get(1));
+
+        new Thread(() -> {
+            printStudent(nameStudents.get(2));
+            printStudent(nameStudents.get(3));
+        }).start();
+
+        new Thread(() -> {
+            printStudent(nameStudents.get(4));
+            printStudent(nameStudents.get(5));
+        }).start();
+
+
+    }
+
+    private synchronized void printStudent(String name) {
+        logger.info(name);
+    }
+
 
 
 }

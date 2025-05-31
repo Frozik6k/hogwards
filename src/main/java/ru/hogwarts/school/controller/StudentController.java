@@ -153,11 +153,13 @@ public class StudentController {
     }
 
     @GetMapping("print-parallel") // http://localhost:8080/student/print-parallel
-    public ResponseEntity getAllStudentPrintParallel() {
-
+    public void getAllStudentPrintParallel() {
         studentService.getAllStudentPrintParallel();
+    }
 
-        return ResponseEntity.ok().build();
+    @GetMapping("print-synchronized") // http://localhost:8080/student/print-synchronized
+    public void getAllStudentPrintParallelSynchronized() {
+        studentService.getAllStudentPrintParallelSynchronized();
     }
 
 }
