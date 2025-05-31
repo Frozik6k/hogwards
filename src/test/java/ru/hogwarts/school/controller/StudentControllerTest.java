@@ -1,5 +1,6 @@
 package ru.hogwarts.school.controller;
 
+import org.hibernate.annotations.Synchronize;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,12 +14,15 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.repository.AvatarRepository;
 import ru.hogwarts.school.repository.FacultyRepository;
 import ru.hogwarts.school.repository.StudentRepository;
+import ru.hogwarts.school.service.AvatarService;
 import ru.hogwarts.school.service.FacultyService;
 import ru.hogwarts.school.service.StudentService;
 import ru.hogwarts.school.util.FacultyFixed;
@@ -46,11 +50,17 @@ public class StudentControllerTest {
     @MockBean
     private FacultyRepository facultyRepository;
 
+    @MockBean
+    private AvatarRepository avatarRepository;
+
     @SpyBean
     private StudentService studentService;
 
     @SpyBean
     private FacultyService facultyService;
+
+    @SpyBean
+    private AvatarService avatarService;
 
     @InjectMocks
     private StudentController studentController;
