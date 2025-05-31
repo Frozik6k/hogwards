@@ -152,4 +152,12 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getSumIterator());
     }
 
+    @GetMapping("print-parallel") // http://localhost:8080/student/print-parallel
+    public ResponseEntity getAllStudentPrintParallel() {
+
+        studentService.getAllStudentPrintParallel();
+
+        return ResponseEntity.ok().build();
+    }
+
 }

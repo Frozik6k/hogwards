@@ -2,6 +2,8 @@ package ru.hogwarts.school.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
@@ -10,6 +12,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
@@ -116,6 +119,25 @@ public class StudentService {
         logger.info("lead time: " + differenceInMillis + " ms");
 
         return sum;
+    }
+
+    public void getAllStudentPrintParallel() {
+        PageRequest pageRequest = PageRequest.of(0, 6, Sort.by(Sort.Direction.ASC, "id"));
+        List<String> nameStudents = studentRepository.findAll(pageRequest)
+                .map(Student::getName)
+                .toList();
+        logger.info(nameStudents.get(0));
+        logger.info(nameStudents.get(1));
+
+        new Thread(() -> {
+            logger.info(nameStudents.get(2));
+            logger.info(nameStudents.get(3));
+        }).start();
+
+        new Thread(() -> {
+            logger.info(nameStudents.get(4));
+            logger.info(nameStudents.get(5));
+        }).start();
     }
 
 
