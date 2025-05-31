@@ -6,7 +6,14 @@ import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 @Service
 public class StudentService {
@@ -74,6 +81,41 @@ public class StudentService {
         logger.info("Was invoked method for find last five students");
 
         return studentRepository.findByLastFiveStudents();
+    }
+
+    public Collection<String> findNameStudentFirstLetterA() {
+        return studentRepository.findAll()
+                .stream()
+                .parallel()
+                .filter(student -> student.getName().charAt(0) == 'А' || student.getName().charAt(0) == 'а')
+                .map(student -> student.getName().toUpperCase())
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public Double getMiddleAge() {
+        return studentRepository.findAll()
+                .stream()
+                .parallel()
+                .mapToDouble(Student::getAge)
+                .average()
+                .orElse(0);
+    }
+
+    public int getSumIterator() {
+        LocalDateTime startDateTime = LocalDateTime.now();
+        int sum = (int) LongStream.iterate(1, a -> a + 1)
+                .limit(1_000_000)
+                .sum();
+
+
+        LocalDateTime endDateTime = LocalDateTime.now();
+
+        long differenceInMillis = ChronoUnit.MILLIS.between(startDateTime, endDateTime);
+
+        logger.info("lead time: " + differenceInMillis + " ms");
+
+        return sum;
     }
 
 

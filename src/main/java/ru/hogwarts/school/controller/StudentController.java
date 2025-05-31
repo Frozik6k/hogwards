@@ -18,6 +18,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("student")
@@ -134,5 +135,21 @@ public class StudentController {
 
     @GetMapping("end5students") // http://localhost:8080/student/end5students
     public ResponseEntity<Collection<Student>> getLastFiveStudents() { return ResponseEntity.ok(studentService.findByLastFiveStudents()); }
+
+    @GetMapping("first_letter_A") // http://localhost:8080/student/first_letter_A
+    public ResponseEntity<Collection<String>> findNameStudentFirstLetterA() {
+        return ResponseEntity.ok(studentService.findNameStudentFirstLetterA());
+    }
+
+    @GetMapping("middle_age") // http://localhost:8080/student/middle_age
+    public ResponseEntity<Double> getMiddleAge() {
+        return ResponseEntity.ok(studentService.getMiddleAge());
+    }
+
+    @GetMapping("get_sum_iterator") // http://localhost:8080/student/get_sum_iterator
+    public ResponseEntity<Integer> getSumIterator() {
+
+        return ResponseEntity.ok(studentService.getSumIterator());
+    }
 
 }
